@@ -1,0 +1,29 @@
+services:
+    app:
+        container_name: nest_app
+        depends_on:
+            - database
+        image: node:alpine3.22
+        ports:
+            - "3000:3000"
+        volumes:
+            - .:/app
+        networks:
+            - nest_network
+        working_dir: /app
+        entrypoint: ["npm", "run", "start:dev"]
+
+    database:
+        container_name: nest_db
+        image: postgres:alpine
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=security_template_nest
+        ports:
+            - "5432:5432"
+        networks:
+            - nest_network
+
+networks:
+    nest_network:
