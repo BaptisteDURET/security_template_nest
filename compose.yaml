@@ -11,7 +11,7 @@ services:
         networks:
             - nest_network
         working_dir: /app
-        entrypoint: ["npm", "run", "start:dev"]
+        entrypoint: ["sh", "-c", "npm install && npm run start:dev"]
 
     database:
         container_name: nest_db
