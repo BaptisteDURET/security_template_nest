@@ -3,7 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from '../Controller/app.controller';
 import { AppService } from '../app.service';
 import { UserModule } from './user.module';
-// import { ProtectedModule } from './protected.module';
+import { AuthenticationModule } from './auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { TestController } from '../Controller/guard.controller';
 
 @Module({
     imports: [
@@ -19,11 +21,15 @@ import { UserModule } from './user.module';
             autoLoadEntities: true,
             logging: true,
         }),
+        JwtModule.register({
+            secret: process.env.JWT_SECRET,
+            signOptions: { expiresIn: '1h' },
+        }),
         UserModule,
-        // ProtectedModule,
+        AuthenticationModule,
     ],
 
-    controllers: [AppController],
+    controllers: [AppController, TestController],
     providers: [AppService],
 })
 export class AppModule {}

@@ -15,13 +15,16 @@ export class AuthenticationGuard implements CanActivate {
     canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest<Request>();
         const token = this.extractTokenFromHeader(request);
+        console.log(token);
 
         if (!token) {
             throw new UnauthorizedException();
         }
 
         try {
-            const payload = this.jwtService.verify<UserPayload>(token);
+            const payload = this.jwtService.verify<UserPayload>(token, {
+                secret: process.env.JWT_SECRET,
+            });
             request.user = payload;
 
             return true;
