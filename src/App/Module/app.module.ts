@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from '../Controller/app.controller';
-import { AppService } from '../app.service';
+import { AppService } from '../Service/app.service';
 import { UserModule } from './user.module';
 import { AuthenticationModule } from './auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { TestController } from '../Controller/guard.controller';
+import { ProductModule } from './product.module';
 
 @Module({
     imports: [
@@ -27,6 +28,7 @@ import { TestController } from '../Controller/guard.controller';
         }),
         UserModule,
         AuthenticationModule,
+        ProductModule,
     ],
 
     controllers: [AppController, TestController],
