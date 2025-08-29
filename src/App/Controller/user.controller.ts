@@ -3,6 +3,7 @@ import {
     Body,
     Controller,
     Get,
+    HttpCode,
     Post,
     UseInterceptors,
 } from '@nestjs/common';
@@ -22,6 +23,7 @@ export class UserController {
     }
 
     @Post()
+    @HttpCode(201)
     @UseInterceptors(AnyFilesInterceptor())
     async createUser(@Body() body: CreateUserDto): Promise<User> {
         if (

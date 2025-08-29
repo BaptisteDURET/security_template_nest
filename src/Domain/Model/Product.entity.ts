@@ -48,4 +48,16 @@ export class Product {
         name: 'product_category',
     })
     categories: Array<Category>;
+
+    constructor(
+        name: string,
+        description: string,
+        price: number,
+        categories: Category[],
+    ) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.categories = categories;
+    }
 }

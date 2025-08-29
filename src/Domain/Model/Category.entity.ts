@@ -26,4 +26,8 @@ export class Category {
         name: 'product_category',
     })
     products: Array<Product>;
+
+    constructor(label: string) {
+        this.label = label;
+    }
 }
